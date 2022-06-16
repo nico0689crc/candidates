@@ -30,7 +30,6 @@ on:
   push:
     branches:
       - "main"
-      - "development"
 
 env:
   AWS_REGION: MY_AWS_REGION                   # set this to your preferred AWS region, e.g. us-west-1
@@ -84,8 +83,8 @@ jobs:
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: ${{ env.ECS_TASK_DEFINITION }}
-        container-name: ${{ env.CONTAINER_NAME }}
+        task-definition: task-definition.json
+        container-name: candidates
         image: ${{ steps.build-image.outputs.image }}
 
     - name: Deploy Amazon ECS task definition
